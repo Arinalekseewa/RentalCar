@@ -8,7 +8,7 @@ export default function CatalogPage() {
 
     return (
         <div className={styles.container}>
-            {/* <FiltersBox /> */}
+            <FiltersBox />
             <CarsList />
             {/* <LoadMoreBtn/> */}
         </div>

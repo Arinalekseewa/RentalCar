@@ -1,21 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCars } from '../cars/operations';
-import { createSelector } from '@reduxjs/toolkit';
-import { selectBrandFilter } from '../filters/slice';
-import { selectCars } from "./selectors";
-
-// const initialState = [];
 
 const carsSlice = createSlice({
     name: 'cars',
     initialState: {
         items: [],
-        isLoading: false,
-        error: null,
+        filtered: [],
+        selectedBrand: "",
+        selectedPrice: null,
     },
-    reducers: {},
+  reducers: {
+    setBrandFilter(state, action) {
+      state.selectedBrand = action.payload;
+    },
+    setFilteredCars(state, action) {
+    state.filtered = action.payload;
+  }
+    },
 
-    extraReducers: builder => {
+    extraReducers: (builder) => {
         builder
             .addCase(fetchCars.pending, state => {
                 state.isLoading = true;
@@ -28,18 +31,8 @@ const carsSlice = createSlice({
             .addCase(fetchCars.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
-            });
+            })
     },
 });
-
-export const selectFilteredCars = createSelector(
-  [selectCars, selectBrandFilter],
-  (cars, filter) => {
-    return cars.filter(car =>
-      car.brand.toLowerCase() ||
-      car.model.toLowerCase()
-    );
-  }
-);
 
 export default carsSlice.reducer;

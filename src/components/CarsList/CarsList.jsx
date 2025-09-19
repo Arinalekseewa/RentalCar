@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { selectFilteredCars } from "../../redux/cars/slice";
+import { selectFilteredCars } from "../../redux/filters/slice";
 import { fetchCars } from "../../redux/cars/operations";
 import styles from './CarsList.module.css';
 import Cars from '../Cars/Cars';
