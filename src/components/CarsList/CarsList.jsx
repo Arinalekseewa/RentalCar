@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { selectFilteredCars } from "../../redux/filters/slice";
+import { selectFilteredCars, setFilteredCars } from "../../redux/filters/slice";
 import { fetchCars } from "../../redux/cars/operations";
 import styles from './CarsList.module.css';
 import Cars from '../Cars/Cars';
@@ -8,10 +8,13 @@ import Cars from '../Cars/Cars';
 export default function CarsList() {
   const dispatch = useDispatch();
   const cars = useSelector(selectFilteredCars);
-  const { isLoading, error } = useSelector((state) => state.cars);
+  const { items, isLoading, error } = useSelector((state) => state.cars);
   
   useEffect(() => {
-    dispatch(fetchCars());
+    dispatch(fetchCars())
+      .then(({ payload }) => {
+        dispatch(setFilteredCars(payload.cars));
+      });
   }, [dispatch]);
 
   if (isLoading) return <p>Loading...</p>;

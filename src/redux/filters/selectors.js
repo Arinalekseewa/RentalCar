@@ -1,5 +1,5 @@
 export const selectFilter = (state) => state.filters.brand;
-export const selectBrands = (state) => state.cars.brands || [];
+export const selectBrands = (state) => state.filters.brands || [];
 export const selectSelectedBrand = (state) => state.cars.selectedBrand;
 export const selectSelectedPrice = (state) => state.cars.selectedPrice;
 
