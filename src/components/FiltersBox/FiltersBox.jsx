@@ -5,7 +5,8 @@ import { selectBrands, selectUniquePrices } from "../../redux/filters/selectors"
 import { selectCars } from "../../redux/cars/selectors";
 import { setFilteredCars } from "../../redux/filters/slice";
 import styles from "./FiltersBox.module.css";
-import Select from 'react-select';
+// import sprite from "../../assets/sprite.svg";
+import Select from "react-select";
 
 export default function FiltersBox() {
   const dispatch = useDispatch();
@@ -16,9 +17,10 @@ export default function FiltersBox() {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [minMileage, setMinMileage] = useState("");
-    const [maxMileage, setMaxMileage] = useState("");
+  const [maxMileage, setMaxMileage] = useState("");
     
-    const brandOptions = brands.map(brand => ({ value: brand, label: brand }));
+  const brandOptions = brands.map(brand => ({ value: brand, label: brand }));
+  const priceOptions = prices.map(price => ({ value: price, label: price }));
 
   useEffect(() => {
     dispatch(fetchBrands());
@@ -39,33 +41,38 @@ export default function FiltersBox() {
     <div className={styles.searchBox}>
         <div className={styles.filter}>
             <label htmlFor="brand" className={styles.label}>Car brand</label>
-            <select id="brand" value={selectedBrand} onChange={e => setSelectedBrand(e.target.value)}>
-        <option value="" className={styles.placeholder}>Choose a brand</option>
-        {brands.map((brand) => (
-            <option key={brand} value={brand}>{brand}</option>
-        ))}
-            </select>
+          <Select className={styles.select} classNamePrefix="rs" options={brandOptions}
+            isSearchable
+            name="brand"
+            value={
+              brandOptions.find(option => option.value === selectedBrand) || null
+            }
+            onChange={option => setSelectedBrand(option?.value || "")}
+            placeholder="Choose a brand"
+          />
           </div>
           
           <div className={styles.filter}>
               <label htmlFor="price" className={styles.label}>Price/ 1 hour</label>
-      <select id="price" value={selectedPrice} onChange={e => setSelectedPrice(e.target.value)}>
-        <option value="">Choose a price</option>
-        {prices.map(price => (
-          <option key={price} value={price}>{price}$</option>
-        ))}
-      </select>
+        <Select className={styles.select} classNamePrefix="rs" options={priceOptions}
+            isSearchable
+            name="price"
+            value={
+              priceOptions.find(option => option.value === selectedPrice) || null
+            }
+            onChange={option => setSelectedPrice(option?.value || "")}
+            placeholder="Choose a price"
+          />
           </div>
           
     <div className={styles.filter}>
         <label htmlFor="price" className={styles.label}>Сar mileage / km</label>
         <div className={styles.input}>
-            <input type="number" placeholder="From" value={minMileage} onChange={e => setMinMileage(e.target.value)} />
-            <input type="number" placeholder="To" value={maxMileage} onChange={e => setMaxMileage(e.target.value)} />    
+            <input className={styles.left} type="number" placeholder="From" value={minMileage} onChange={e => setMinMileage(e.target.value)} />
+            <input className={styles.right} ype="number" placeholder="To" value={maxMileage} onChange={e => setMaxMileage(e.target.value)} />    
         </div>
               
     </div>
-
       <button onClick={handleFilter}>Search</button>
     </div>
   );

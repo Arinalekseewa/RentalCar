@@ -1,12 +1,17 @@
 import styles from './Cars.module.css'
+import { useNavigate } from "react-router-dom";
 
-export default function Cars({ brand, model, year, img, rentalPrice, address = '', rentalCompany, type, mileage }) {
+export default function Cars({ id, brand, model, year, img, rentalPrice, address = '', rentalCompany, type, mileage }) {
   const [street = '', city = '', country = ''] = address.split(',') || [];
-  
+  const navigate = useNavigate();
+  const handleLearnMoreClick = () => {
+    navigate(`/catalog/${id}`);
+  };
+
     return (
     <li>
-        <div>
-                <img className={styles.img} src={img} alt={`${brand} ${model}`} width={268} />
+        <div className={styles.imgWrapper}>
+                <img className={styles.img} src={img} alt={`${brand} ${model}`} width={276} />
         </div>
         <div className={styles.textCont}>
             <h5>{brand} <span>{model}</span>, {year}</h5>
@@ -23,7 +28,7 @@ export default function Cars({ brand, model, year, img, rentalPrice, address = '
         </p>
       </div>
         
-      <button>Read more</button>
+      <button onClick={handleLearnMoreClick}>Read more</button>
     </li>
   );
 }
