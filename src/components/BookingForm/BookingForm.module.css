@@ -1,0 +1,32 @@
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.btn {
+    border-radius: 12px;
+    padding: 12px 51px;
+    width: 156px;
+    height: 44px;
+}
+
+input, textarea {
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    padding: 14px 20px;
+    background: var(--inputs);
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 125%;
+    color: var(--gray);
+    box-sizing: border-box;
+    width: 100%;
+}
+
+textarea {
+    resize: none;
+}

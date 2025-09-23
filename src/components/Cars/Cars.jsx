@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function Cars({ id, brand, model, year, img, rentalPrice, address = '', rentalCompany, type, mileage }) {
   const [street = '', city = '', country = ''] = address.split(',') || [];
   const navigate = useNavigate();
+  
   const handleLearnMoreClick = () => {
     navigate(`/catalog/${id}`);
   };
