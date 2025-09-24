@@ -1,5 +1,6 @@
 import styles from './Cars.module.css'
 import { useNavigate } from "react-router-dom";
+import FavouriteBtn from '../FavouriteBtn/FavouriteBtn';
 
 export default function Cars({ id, brand, model, year, img, rentalPrice, address = '', rentalCompany, type, mileage }) {
   const [street = '', city = '', country = ''] = address.split(',') || [];
@@ -12,7 +13,8 @@ export default function Cars({ id, brand, model, year, img, rentalPrice, address
     return (
     <li>
         <div className={styles.imgWrapper}>
-                <img className={styles.img} src={img} alt={`${brand} ${model}`} width={276} />
+          <img className={styles.img} src={img} alt={`${brand} ${model}`} width={276} />
+          <FavouriteBtn carId={id} />
         </div>
         <div className={styles.textCont}>
             <h5>{brand} <span>{model}</span>, {year}</h5>
@@ -23,10 +25,10 @@ export default function Cars({ id, brand, model, year, img, rentalPrice, address
           <p>
           {city} | {country} | {rentalCompany}
           </p>
-
         <p>
           {type} | {mileage} km
-        </p>
+          </p>
+          
       </div>
         
       <button onClick={handleLearnMoreClick}>Read more</button>

@@ -5,11 +5,11 @@ import { fetchCars } from "../../redux/cars/operations";
 import styles from './CarsList.module.css';
 import Cars from '../Cars/Cars';
 
-export default function CarsList() {
+export default function CarsList({visibleCount}) {
   const dispatch = useDispatch();
   const cars = useSelector(selectFilteredCars);
-  const { items, isLoading, error } = useSelector((state) => state.cars);
-  
+  const { isLoading, error } = useSelector((state) => state.cars);
+
   useEffect(() => {
     dispatch(fetchCars())
       .then(({ payload }) => {
@@ -20,9 +20,12 @@ export default function CarsList() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
+  const visibleCars = cars.slice(0, visibleCount);
+  
   return (
-    <ul className={styles.list}>
-      {cars.map(({ id, brand, model, year, img, rentalPrice, address, rentalCompany, type, mileage }) => (
+    <div className={styles.carList}>
+      <ul className={styles.list}>
+      {visibleCars.map(({ id, brand, model, year, img, rentalPrice, address, rentalCompany, type, mileage }) => (
         <Cars
           key={id}
           id={id}
@@ -38,5 +41,6 @@ export default function CarsList() {
         />
       ))}
     </ul>
+    </div>
   );
 }

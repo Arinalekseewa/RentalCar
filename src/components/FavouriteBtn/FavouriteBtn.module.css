@@ -1,0 +1,15 @@
+.favbtn {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 16px;
+    height: 16px;
+    z-index: 1;
+    background-color: transparent;
+}
+
+.favbtn:hover, 
+.favbtn:active,
+.favbtn:focus {
+    background-color: transparent;
+}

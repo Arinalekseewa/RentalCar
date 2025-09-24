@@ -1,15 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCars } from '../cars/operations';
-import { fetchCarById } from '../cars/operations'; // thunk для однієї машини
+import { fetchCarById } from '../cars/operations';
 
 const initialState = {
   items: [],
   filtered: [],
+  favourites: [],
   selectedBrand: "",
   selectedPrice: null,
   isLoading: false,
   error: null,
-  carById: {}, // для збереження машини по id
+  carById: {},
 };
 
 const carsSlice = createSlice({
@@ -21,6 +22,14 @@ const carsSlice = createSlice({
     },
     setFilteredCars(state, action) {
       state.filtered = action.payload;
+    },
+    toggleFavourite(state, action) { 
+      const carId = action.payload;
+      if (state.favourites.includes(carId)) {
+        state.favourites = state.favourites.filter(id => id !== carId);
+      } else {
+        state.favourites.push(carId);
+      }
     },
   },
   extraReducers: (builder) => {
@@ -55,5 +64,5 @@ const carsSlice = createSlice({
   },
 });
 
-export const { setBrandFilter, setFilteredCars } = carsSlice.actions;
+export const { setBrandFilter, setFilteredCars, toggleFavourite } = carsSlice.actions;
 export default carsSlice.reducer;
