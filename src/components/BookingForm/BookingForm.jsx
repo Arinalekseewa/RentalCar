@@ -25,12 +25,6 @@ export default function BookingForm({ carId }) {
   });
 
   const handleSubmit = (values, { resetForm }) => {
-    // Імітуємо відправку на сервер
-    console.log({ carId, ...values });
-    
-    // Твоїй API-запит сюди, наприклад axios.post(...)
-    // axios.post(`/api/bookings`, { carId, ...values })
-
     toast.success('Машина успішно заброньована!');
     resetForm();
     setStartDate(null);
@@ -60,14 +54,14 @@ export default function BookingForm({ carId }) {
           <div>
             <label htmlFor="date"></label>
                 <DatePicker
-              placeholder="Booking date"
-              selected={startDate}
-              onChange={(date) => {
-                setStartDate(date);
-                setFieldValue('date', date);
-              }}
-              minDate={new Date()}
-              placeholderText="Booking date"
+                placeholder="Booking date"
+                selected={startDate}
+                onChange={(date) => {
+                  setStartDate(date);
+                  setFieldValue('date', date);
+                }}
+                minDate={new Date()}
+                placeholderText="Booking date"
             />
             <ErrorMessage name="date" component="div" className="error" />
           </div>

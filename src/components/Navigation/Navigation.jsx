@@ -1,11 +1,15 @@
 import styles from './Navigation.module.css';
 import { NavLink } from 'react-router-dom';
-import logo from '../../assets/logo.svg';
+import sprite from '../../assets/logo.svg';
 
 const Navigation = () => {
     return (
         <div className={styles.header}>
-            <img src={logo} alt="Logo" style={{ width: "120px", height: "26px" }} />
+            <a href="/">
+                <svg width="102" height="16">
+                    <use href={`${sprite}#icon-logo`}></use>
+                </svg>
+            </a>
         <nav className={styles.nav}>
             <NavLink className={styles.link} to="/">
                 Home

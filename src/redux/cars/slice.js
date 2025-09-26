@@ -5,7 +5,7 @@ import { fetchCarById } from '../cars/operations';
 const initialState = {
   items: [],
   filtered: [],
-  favourites: [],
+  favourites: JSON.parse(localStorage.getItem('favourites')) || [],
   selectedBrand: "",
   selectedPrice: null,
   isLoading: false,
@@ -30,6 +30,7 @@ const carsSlice = createSlice({
       } else {
         state.favourites.push(carId);
       }
+      localStorage.setItem('favourites', JSON.stringify(state.favourites));
     },
   },
   extraReducers: (builder) => {

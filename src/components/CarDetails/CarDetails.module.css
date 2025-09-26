@@ -2,6 +2,20 @@
     display: flex;
     flex-direction: row;
     gap: 72px;
+    padding: 0px 120px;
+    margin: 84px auto 104px auto;
+    align-items: stretch;
+}
+
+.cont>div:first-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.infocont {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 img {
@@ -14,9 +28,10 @@ img {
     border: 1px solid var(--gray-light);
     border-radius: 10px;
     padding: 32px;
-    width: 640px;
-    height: 488px;
     background: var(--white);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .title {
@@ -26,11 +41,12 @@ img {
 }
 
 h4 {
-font-family: var(--font-family);
+    font-family: var(--font-family);
     font-weight: 600;
     font-size: 20px;
     line-height: 120%;
     color: var(--main);
+    margin-bottom: 8px;
 }
 
 p {
@@ -39,9 +55,14 @@ p {
     font-size: 16px;
     line-height: 125%;
     color: var(--gray);
+    margin-bottom: 24px;
 }
 
-h2 {
+.shortInfoCont {
+    margin-bottom: 68px;
+}
+
+.title {
     font-family: var(--font-family);
         font-weight: 600;
         font-size: 24px;
@@ -49,6 +70,7 @@ h2 {
         text-align: center;
         color: var(--main);
         margin-bottom: 8px;
+    text-align: left;
 }
 
 .infotext {
@@ -58,10 +80,47 @@ h2 {
         line-height: 125%;
         color: var(--main);
         margin-bottom: 16px;
+        text-align: left;
 }
 
 .carinfo {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    text-align: left;
+    flex: 1;
+}
+
+.carinfo h4 {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    color: var(--main);
+    margin-bottom: 20px;
+}
+
+.carinfo>div:last-child {
+    margin-bottom: 0;
+}
+
+.infoText {
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-family);
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 125%;
+        color: var(--main);
+}
+
+.spanPrice {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 133%;
+    color: var(--button);
+    margin-bottom: 32px;
+    text-align: left;
 }

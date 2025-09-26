@@ -11,7 +11,7 @@ export default function Cars({ id, brand, model, year, img, rentalPrice, address
   };
 
     return (
-    <li>
+    <li className={styles.carsList}>
         <div className={styles.imgWrapper}>
           <img className={styles.img} src={img} alt={`${brand} ${model}`} width={276} />
           <FavouriteBtn carId={id} />
