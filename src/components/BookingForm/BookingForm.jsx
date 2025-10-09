@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import styles from "./BookingForm.module.css";
@@ -31,50 +31,68 @@ export default function BookingForm({ carId }) {
   };
 
   return (
+    <>
       <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ setFieldValue, values }) => (
-              <Form>
-                  <div className={styles.inputs}>
-                      <div >
-            <label htmlFor="name"></label>
-            <Field name="name" type="text" placeholder="Name*"/>
-            <ErrorMessage name="name" component="div" className="error" />
-          </div>
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+        validateOnBlur={true}
+        validateOnChange={true}
+      >
+        {({ setFieldValue, errors, touched }) => (
+          <Form>
+            <div className={styles.inputs}>
+              <div>
+                <Field
+                  name="name"
+                  type="text"
+                  placeholder="Name*"
+                  className={`${styles.input} ${errors.name && touched.name ? styles.errorInput : ''}`}
+                />
+                <ErrorMessage name="name" component="div" className={styles.error} />
+              </div>
 
-          <div>
-            <label htmlFor="email"></label>
-            <Field name="email" type="email" placeholder="Email*"/>
-            <ErrorMessage name="email" component="div" className="error" />
-          </div>
+              <div>
+                <Field
+                  name="email"
+                  type="email"
+                  placeholder="Email*"
+                  className={`${styles.input} ${errors.email && touched.email ? styles.errorInput : ''}`}
+                />
+                <ErrorMessage name="email" component="div" className={styles.error} />
+              </div>
 
-          <div>
-            <label htmlFor="date"></label>
+              <div>
                 <DatePicker
-                placeholder="Booking date"
-                selected={startDate}
-                onChange={(date) => {
-                  setStartDate(date);
-                  setFieldValue('date', date);
-                }}
-                minDate={new Date()}
-                placeholderText="Booking date"
-            />
-            <ErrorMessage name="date" component="div" className="error" />
-          </div>
+                  selected={startDate}
+                  onChange={(date) => {
+                    setStartDate(date);
+                    setFieldValue('date', date);
+                  }}
+                  minDate={new Date()}
+                  placeholderText="Booking date"
+                  className={`${styles.input} ${errors.date && touched.date ? styles.errorInput : ''}`}
+                />
+                <ErrorMessage name="date" component="div" className={styles.error} />
+              </div>
 
-          <div>
-            <label htmlFor="comment"></label>
-            <Field as="textarea" rows={3} name="comment" placeholder="Comment"/>
-          </div>
-                  </div>
+              <div>
+                <Field
+                  as="textarea"
+                  rows={3}
+                  name="comment"
+                  placeholder="Comment"
+                  className={styles.input}
+                />
+              </div>
+            </div>
 
-          <button type="submit" className={styles.btn}>Send</button>
-        </Form>
-      )}
-    </Formik>
+            <button type="submit" className={styles.btn}>Send</button>
+          </Form>
+        )}
+      </Formik>
+
+      <ToastContainer position="top-right" autoClose={3000}/>
+    </>
   );
 }

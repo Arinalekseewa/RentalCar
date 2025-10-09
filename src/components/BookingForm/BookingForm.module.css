@@ -48,3 +48,19 @@ textarea {
 .react-datepicker-wrapper {
     display: block !important;
 }
+
+.input {
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.errorInput {
+    border-color: red;
+    background-color: #ffeaea;
+}
+
+:global(.react-datepicker-wrapper) {
+    display: block !important;
+    width: 100% !important;
+}
